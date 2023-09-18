@@ -1,15 +1,16 @@
 @import "_myBootstrap.scss";
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap");
-// font-family: 'Open Sans', sans-serif;
-// font-family: 'Roboto', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap");
+
+// font-family: 'Kalam', cursive;
+
+.font-titoli {
+  font-family: "Kalam", cursive;
+}
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "EB Garamond", serif;
 }
 
-.dropdown-icon::after {
-  display: none;
-}
-
-.dropdown-icon {
-  border: 0;
+.link-nav:hover {
+  color: #de0000;
 }
