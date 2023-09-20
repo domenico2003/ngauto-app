@@ -1,7 +1,8 @@
-import { SET_PROFILE } from "../actions";
+import { SET_PROFILE, SET_PROFILEDETAILS } from "../actions";
 
 const defaultState = {
   me: null,
+  dettaglioAccount: null,
 };
 
 const ProfiloReducer = (state = defaultState, action) => {
@@ -11,7 +12,11 @@ const ProfiloReducer = (state = defaultState, action) => {
         ...state,
         me: action.payload,
       };
-
+    case SET_PROFILEDETAILS:
+      return {
+        ...state,
+        dettaglioAccount: action.payload,
+      };
     default:
       return state;
   }

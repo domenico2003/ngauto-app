@@ -2,16 +2,19 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import logo from "../ng-auto-logo.png";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const MyNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  let account = useSelector((state) => state.profilo.me);
 
   return (
     <Navbar bg="black" variant="dark" expand="lg" sticky="top" className="px-2">
       <Container fluid>
         <Link
-          to={location.pathname === "/" ? "/" : "/home"}
+          to={"/"}
           className="navbar-brand fw-bold text-ng-variant font-titoli d-flex align-items-center"
         >
           <img
@@ -22,20 +25,17 @@ const MyNavbar = () => {
             className="d-inline-block align-top me-2"
           />
           {"  "}
-          <p className="h2 d-inline m-0">NG Auto</p>
+          <p className="h2 fw-bold d-inline m-0">NG Auto</p>
         </Link>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          className={location.pathname === "/" && "d-none"}
-        />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav" className={"text-center"}>
           <div className="me-auto ms-auto">
-            <Nav className={location.pathname === "/" && "d-none"}>
+            <Nav>
               <Link
-                to={"/home"}
+                to={"/"}
                 className={`nav-link link-nav ${
-                  location.pathname === "/home" && "active"
+                  location.pathname === "/" && "active"
                 }`}
               >
                 Home
@@ -74,13 +74,28 @@ const MyNavbar = () => {
               </Link>
             </Nav>
           </div>
-          <Nav className={location.pathname === "/" && "d-none"}>
-            <Button
-              variant=""
-              className="text-center  border-0 link-nav text-white"
-            >
-              <p className="link-nav m-0 ">Domenico dattilo</p>
-            </Button>
+          <Nav
+            className={
+              (location.pathname === "/login" ||
+                location.pathname === "/registration") &&
+              "d-none"
+            }
+          >
+            {account === null ? (
+              <Button variant="ng-variant" onClick={() => navigate("/login")}>
+                Accedi
+              </Button>
+            ) : (
+              <Button
+                variant=""
+                className="text-center  border-0 link-nav text-white"
+                onClick={() => navigate("/account/" + account?.id)}
+              >
+                <p className="link-nav m-0 ">
+                  {account?.nome + " " + account?.cognome}
+                </p>
+              </Button>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

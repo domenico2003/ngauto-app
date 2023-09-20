@@ -1,11 +1,8 @@
-import { FileUpload } from "primereact/fileupload";
+import { useState } from "react";
 import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 const HomePage = () => {
-  useEffect(() => {
-    const url = process.env.REACT_APP_URL;
-    console.log(url);
-  }, []);
-  return;
+  return <p className="h1">home</p>;
 };
 export default HomePage;
