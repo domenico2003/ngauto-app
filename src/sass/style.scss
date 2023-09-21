@@ -23,3 +23,69 @@ body {
 .link-nav:hover {
   color: #de0000;
 }
+.clicked {
+  transform: scale(1);
+  transition: all 0.1s linear;
+}
+
+.clicked:active {
+  transform: scale(1.5);
+}
+.dropdown-toggle::after {
+  display: none;
+}
+
+.datoUser:hover {
+  color: #de0000;
+  cursor: default;
+}
+
+.datoUser {
+  position: relative;
+}
+
+.datoUser::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.5s, left 0.5s, right 0.5s;
+}
+
+.datoUser:hover::after {
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0 !important;
+  margin-inline: 10px;
+  width: fit-content;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #de0000;
+  transition: width 0.5s, left 0.5s, right 0.5s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.utenteRichiedente:hover {
+  color: #de0000;
+  cursor: pointer;
+}

@@ -31,7 +31,7 @@ const MyNavbar = () => {
 
         <Navbar.Collapse id="basic-navbar-nav" className={"text-center"}>
           <div className="me-auto ms-auto">
-            <Nav>
+            <Nav className="align-items-center">
               <Link
                 to={"/"}
                 className={`nav-link link-nav ${
@@ -64,14 +64,16 @@ const MyNavbar = () => {
               >
                 Auto a noleggio
               </Link>
-              <Link
-                to={"/richieste"}
-                className={`nav-link link-nav ${
-                  location.pathname === "/richieste" && "active"
-                }`}
-              >
-                Richieste di noleggio
-              </Link>
+              {account?.ruolo === "ADMIN" && (
+                <Link
+                  to={"/richieste"}
+                  className={`nav-link link-nav ${
+                    location.pathname === "/richieste" && "active"
+                  }`}
+                >
+                  Richieste di noleggio
+                </Link>
+              )}
             </Nav>
           </div>
           <Nav

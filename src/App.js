@@ -14,6 +14,7 @@ import Registration from "./components/Registration";
 import AccountDetails from "./components/AccountDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { profileFetch } from "./redux/actions";
+import RichiestaDetails from "./components/RichiestaDetails";
 function App() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -76,6 +77,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/account/:id" element={<AccountDetails />} />
+              <Route path="/richiestaInfo/:id" element={<RichiestaDetails />} />
             </Routes>
           )}
         </Container>
