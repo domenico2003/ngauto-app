@@ -199,18 +199,20 @@ const AccountDetails = () => {
             <p className="h1 fw-bold font-titoli text-center m-0 mt-5">
               Richieste di noleggio inviate
             </p>
-            <Button
-              variant="outline-ng-variant w-100 mt-3"
-              onClick={() => navigate("/aNoleggio")}
-            >
-              Effettua una richiesta
-            </Button>
+            {profileMe?.id === profileDetail?.id && (
+              <Button
+                variant="outline-ng-variant w-100 mt-3"
+                onClick={() => navigate("/aNoleggio")}
+              >
+                Effettua una richiesta
+              </Button>
+            )}
           </div>
         </div>
         <ListaRichieste
           url={
-            "http://localhost:3001/noleggio?idUtenteRichiedente=" +
-            profileDetail?.id +
+            "http://localhost:3001/noleggio?emailUtenteRichiedente=" +
+            profileDetail?.email +
             "&"
           }
         />

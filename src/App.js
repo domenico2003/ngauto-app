@@ -15,8 +15,10 @@ import AccountDetails from "./components/AccountDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { profileFetch } from "./redux/actions";
 import RichiestaDetails from "./components/RichiestaDetails";
+import RichiesteNoleggioPage from "./components/RichiesteNoleggioPage";
 function App() {
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -76,6 +78,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<HomePage />} />
               <Route path="/registration" element={<Registration />} />
+              {profile !== null && profile?.ruolo === "ADMIN" && (
+                <Route path="/richieste" element={<RichiesteNoleggioPage />} />
+              )}
               <Route path="/account/:id" element={<AccountDetails />} />
               <Route path="/richiestaInfo/:id" element={<RichiestaDetails />} />
             </Routes>

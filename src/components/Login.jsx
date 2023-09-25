@@ -4,9 +4,6 @@ import { profileFetch } from "../redux/actions";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { useEffect } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

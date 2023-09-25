@@ -89,3 +89,30 @@ body {
   color: #de0000;
   cursor: pointer;
 }
+.utenteRichiedente {
+  width: 78px;
+  text-wrap: nowrap;
+}
+.bordoFiltro {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: 2px dashed #de0000;
+}
+
+.img-auto {
+  // height: 250px;
+  // object-fit: contain;
+}
+
+.pointer {
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.pointer:hover {
+  transform: scale(1.1);
+}
+
+hr {
+  border-top: 3.5px solid;
+}
