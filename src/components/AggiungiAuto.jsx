@@ -46,6 +46,7 @@ const AggiungiAuto = () => {
   const [errore, setErrore] = useState("");
   const [spinner, setSpinner] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [idAut, setIdAut] = useState("");
 
   //fetch modelli
   const modelloFetch = async () => {
@@ -172,6 +173,7 @@ const AggiungiAuto = () => {
         if (risposta.ok) {
           let dato = await risposta.json();
           addImmagineFetch(dato.id);
+          setIdAut(dato.id);
         } else {
           let dato = await risposta.json();
           setErrore(dato.message);
@@ -559,8 +561,11 @@ const AggiungiAuto = () => {
                 <span className="text-success success h4 m-0 mb-4 fw-bold font-titoli">
                   Auto salvata con successo!
                 </span>
-                <Button variant="outline-success" onClick={() => navigate("/")}>
-                  torna alla Home
+                <Button
+                  variant="outline-success"
+                  onClick={() => navigate("/auto/" + idAut)}
+                >
+                  Visualizza auto
                 </Button>
               </div>
             )}
