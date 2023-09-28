@@ -13,9 +13,18 @@ import "./sass/style.scss";
 import Registration from "./components/Registration";
 import AccountDetails from "./components/AccountDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { profileFetch } from "./redux/actions";
+import {
+  AlimentazioniFetch,
+  cambiFetch,
+  marcheFetch,
+  profileFetch,
+} from "./redux/actions";
 import RichiestaDetails from "./components/RichiestaDetails";
 import RichiesteNoleggioPage from "./components/RichiesteNoleggioPage";
+import PageAutoNuove from "./components/PageAutoNuove";
+import PageAutousate from "./components/PageAutousate";
+import PageAutoNoleggio from "./components/PageAutoNoleggio";
+import AggiungiAuto from "./components/AggiungiAuto";
 function App() {
   const [loading, setLoading] = useState(false);
 
@@ -32,6 +41,9 @@ function App() {
     if (localStorage.getItem("token") != null && profile === null) {
       dispatch(profileFetch());
     }
+    dispatch(AlimentazioniFetch());
+    dispatch(marcheFetch());
+    dispatch(cambiFetch());
   }, []);
   return (
     <>
@@ -78,6 +90,11 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<HomePage />} />
               <Route path="/registration" element={<Registration />} />
+              <Route path="/nuove" element={<PageAutoNuove />} />
+              <Route path="/usate" element={<PageAutousate />} />
+              <Route path="/addAuto" element={<AggiungiAuto />} />
+              <Route path="/aNoleggio" element={<PageAutoNoleggio />} />
+
               {profile !== null && profile?.ruolo === "ADMIN" && (
                 <Route path="/richieste" element={<RichiesteNoleggioPage />} />
               )}

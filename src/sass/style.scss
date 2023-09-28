@@ -116,3 +116,103 @@ body {
 hr {
   border-top: 3.5px solid;
 }
+
+.titoloPagina {
+  text-decoration: underline #de0000;
+}
+
+.selectForm:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.card-auto-filtro {
+  min-height: 350px;
+  img {
+    min-height: 200px;
+    object-fit: cover;
+  }
+}
+.addAutoCont {
+  position: absolute;
+  top: 30%;
+  min-height: 50%;
+  width: 100%;
+}
+
+@media (min-width: 400px) {
+  .addAutoCont {
+    width: 75%;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .addAutoCont {
+    width: 50%;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .addAutoCont {
+    width: 50%;
+  }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {
+  .addAutoCont {
+    width: 25%;
+  }
+}
+
+.input-numerico {
+  -moz-appearance: textfield; /* Nascondi l'icona in Firefox */
+}
+
+.input-numerico::-webkit-inner-spin-button,
+.input-numerico::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Nascondi l'icona in Chrome, Safari, Edge */
+  margin: 0; /* Risolvi il problema del margine aggiuntivo in Safari */
+}
+
+.custom-file-input {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.custom-file-input input[type="file"] {
+  position: absolute;
+  font-size: 100px;
+  right: 0%;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-input-label {
+  background-color: #f0f0f0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed black;
+  border-radius: 5px;
+  font-size: 24px;
+  color: white;
+}
+
+/* Anteprima dell'immagine selezionata */
+.selected-photo-preview img {
+  // max-width: 100%;
+  // max-height: 200px;
+  // margin-top: 10px;
+}

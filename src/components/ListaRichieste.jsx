@@ -25,7 +25,7 @@ const ListaRichieste = ({ url }) => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
-    console.log(URL);
+
     try {
       let risposta = await fetch(URL, headers);
       if (risposta.ok) {

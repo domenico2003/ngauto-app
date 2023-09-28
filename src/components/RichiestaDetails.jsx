@@ -43,9 +43,6 @@ const RichiestaDetails = () => {
       {richiesta?.autoRichiesta?.note}
     </Tooltip>
   );
-  useEffect(() => {
-    console.log(richiesta);
-  }, [richiesta]);
 
   const DetailsRichiestaFetch = async () => {
     const URL = "http://localhost:3001/noleggio/" + params.id;
