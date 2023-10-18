@@ -70,6 +70,7 @@ const AggiungiAuto = () => {
     } else {
       setModelliTrovati(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marca]);
 
   const avanzaPagina = () => {
@@ -119,6 +120,10 @@ const AggiungiAuto = () => {
         km > 0 &&
         km !== null &&
         km !== "" &&
+        anno > 0 &&
+        anno !== null &&
+        anno !== "" &&
+        anno > 1900 &&
         cilindrata > 0 &&
         cilindrata !== null &&
         cilindrata !== "" &&
@@ -133,7 +138,7 @@ const AggiungiAuto = () => {
         setErrore("");
         setPagina(pagina + 1);
       } else {
-        setErrore("Compila correttamente tutti i campi");
+        setErrore("Compila correttamente tutti i campi correttamente");
       }
     }
   };

@@ -3,7 +3,6 @@ import logo from "../ng-auto-logo.png";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const MyNavbar = () => {
   const location = useLocation();
@@ -25,7 +24,11 @@ const MyNavbar = () => {
             className="d-inline-block align-top me-2"
           />
           {"  "}
-          <p className="h2 fw-bold d-inline m-0">NG Auto</p>
+          <div className="nomeSito">
+            <p className="h2 fw-bold  d-block m-0">
+              N.G. Auto<small>di Nando Bara</small>
+            </p>
+          </div>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 

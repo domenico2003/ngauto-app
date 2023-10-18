@@ -58,7 +58,6 @@ const RispRichiesta = ({ richiesta, fetcRichiesta }) => {
       try {
         let risposta = await fetch(URL, headers);
         if (risposta.ok) {
-          let dato = await risposta.json();
           setSuccess(true);
           fetcRichiesta();
 

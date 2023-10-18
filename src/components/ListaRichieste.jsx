@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { BsFillInfoSquareFill } from "react-icons/bs";
-const ListaRichieste = ({ url }) => {
+import ModalEffettuaRichiesta from "./ModalEffettuaRichiesta";
+const ListaRichieste = ({
+  url,
+  effettuarichiestamodale,
+  seteffettuarichiestamodale,
+  auto,
+}) => {
   const navigate = useNavigate();
   const [richieste, setRichieste] = useState(null);
   const [pagina, setPagina] = useState(0);
@@ -13,6 +19,7 @@ const ListaRichieste = ({ url }) => {
     if (!url.includes("undefined")) {
       richiesteFetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, url]);
 
   const richiesteFetch = async () => {
@@ -44,7 +51,13 @@ const ListaRichieste = ({ url }) => {
       }, 1500);
     }
   };
-
+  const formatDate = (date) => {
+    const formattedDate = new Date(date);
+    const day = formattedDate.getDate();
+    const month = formattedDate.getMonth() + 1;
+    const year = formattedDate.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
   return (
     <>
       <div className="d-flex justify-content-between align-items-center my-4 px-4 border-bottom border-ng-variant">
@@ -71,10 +84,14 @@ const ListaRichieste = ({ url }) => {
                   {richiesta.utente.nome} {richiesta.utente.cognome}
                 </p>
                 <p className="text-center m-0  d-none d-md-block">
-                  <span className=" datoUser">{richiesta?.daData}</span>
+                  <span className=" datoUser">
+                    {formatDate(richiesta?.daData)}
+                  </span>
                 </p>
                 <p className="text-center m-0  d-none d-md-block">
-                  <span className=" datoUser">{richiesta?.finoA}</span>
+                  <span className=" datoUser">
+                    {formatDate(richiesta?.finoA)}
+                  </span>
                 </p>
 
                 <p className="text-center m-0 ">
@@ -112,19 +129,33 @@ const ListaRichieste = ({ url }) => {
             )}
 
           <Row className="justify-content-center mt-4 mb-5">
-            <Col xs={6} sm={4} lg={2} className="d-flex">
+            <Col xs={5} sm={4} lg={2} className="d-flex">
               {!richieste?.first && (
                 <Button
                   variant="outline-ng-variant"
                   onClick={() => setPagina(pagina - 1)}
-                  className="me-4 flex-fill"
+                  className=" flex-fill"
                   href="#"
                 >
                   Precedente
                 </Button>
               )}
             </Col>
-            <Col xs={6} sm={4} lg={2} className="d-flex">
+            <Col
+              xs={2}
+              className="d-flex align-items-center justify-content-center"
+            >
+              {richieste !== null &&
+                !spinner &&
+                error === "" &&
+                richieste?.content.length !== 0 && (
+                  <span className="text-center fw-bold h3 font-titoli m-0 ">
+                    {" "}
+                    {richieste?.number + 1}/{richieste?.totalPages}
+                  </span>
+                )}
+            </Col>
+            <Col xs={5} sm={4} lg={2} className="d-flex">
               {!richieste?.last && (
                 <Button
                   variant="outline-ng-variant "
@@ -146,6 +177,14 @@ const ListaRichieste = ({ url }) => {
         <div className="d-flex justify-content-center mt-5">
           <Spinner animation="grow" variant="ng-variant" />
         </div>
+      )}
+      {effettuarichiestamodale && (
+        <ModalEffettuaRichiesta
+          show={effettuarichiestamodale}
+          onHide={() => seteffettuarichiestamodale(false)}
+          auto={auto}
+          fetch={() => richiesteFetch()}
+        />
       )}
     </>
   );

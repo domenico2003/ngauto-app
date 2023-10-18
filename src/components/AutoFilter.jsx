@@ -49,6 +49,7 @@ const AutoFilter = ({ urlBase }) => {
     } else {
       setModelliTrovati(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marca]);
   //costruisco l'URL
   useEffect(() => {
@@ -59,6 +60,7 @@ const AutoFilter = ({ urlBase }) => {
     setModello("--Modello--");
     setPrezzoMin("--Prezzo minimo--");
     setPrezzoMax("--Prezzo massimo--");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const componiUrl = () => {
@@ -149,7 +151,12 @@ const AutoFilter = ({ urlBase }) => {
           <Form.Select
             aria-label="stato"
             value={marca}
-            onChange={(e) => setMarca(e.target.value)}
+            onChange={(e) => {
+              setMarca(e.target.value);
+              if (e.target.value === "--Marca--") {
+                setModello("--Modello--");
+              }
+            }}
             className={` mb-2 fw-bold selectForm`}
           >
             <option className="fw-bold h6">--Marca--</option>

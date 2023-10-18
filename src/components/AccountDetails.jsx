@@ -87,6 +87,7 @@ const AccountDetails = () => {
   };
   useEffect(() => {
     dispatch(DetailsProfileFetch(params.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, profileMe]);
 
   const handleLogout = () => {

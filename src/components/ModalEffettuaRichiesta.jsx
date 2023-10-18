@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import ModalSuccessAction from "./ModalSuccessAction";
+import { useSelector } from "react-redux";
 
-const ModalModificaRichiesta = (props) => {
-  const [validated, setValidated] = useState(false);
-  const [modificaSuccess, setModificaSuccess] = useState(false);
+const ModalEffettuaRichiesta = (props) => {
   const [daData, setDaData] = useState("");
   const [finoA, setFinoA] = useState("");
   const [errore, setErrore] = useState("");
-
-  useEffect(() => {
-    setDaData(props?.richiesta?.daData);
-    setFinoA(props?.richiesta?.finoA);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [validated, setValidated] = useState(false);
+  const [success, setSuccess] = useState(false);
+  let profileMe = useSelector((state) => state.profilo.me);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,34 +18,39 @@ const ModalModificaRichiesta = (props) => {
       e.preventDefault();
       e.stopPropagation();
     }
-    setValidated(true);
 
+    setValidated(true);
     if (daData !== "" && finoA !== "") {
       setErrore("");
-      const URL = "http://localhost:3001/noleggio/" + props?.richiesta?.id;
+
+      const URL = `http://localhost:3001/noleggio`;
       const headers = {
-        method: "PUT",
+        method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          idUtenteRichiedente: profileMe?.id,
           daData: daData,
           aData: finoA,
-          idAutoRichiesta: props?.richiesta?.autoRichiesta?.id,
+          idAutoRichiesta: props.auto.id,
         }),
       };
       try {
         let risposta = await fetch(URL, headers);
         if (risposta.ok) {
-          setErrore("");
-          setModificaSuccess(true);
           setTimeout(() => {
-            setModificaSuccess(false);
-            props.richiestaFetch();
+            setSuccess(true);
+          }, 800);
 
+          setTimeout(() => {
+            setSuccess(false);
+            if (props.fetch !== undefined) {
+              props.fetch();
+            }
             props.onHide();
-          }, 1500);
+          }, 2300);
         } else {
           let dato = await risposta.json();
           setErrore(dato.message);
@@ -57,9 +58,8 @@ const ModalModificaRichiesta = (props) => {
       } catch (error) {
         console.log(error);
       }
-    } else setErrore("compilare tutti i campi");
+    }
   };
-
   return (
     <>
       <Modal
@@ -73,12 +73,14 @@ const ModalModificaRichiesta = (props) => {
           closeButton
           className="bg-secondario text-bianco border-ng-variant"
         >
-          <p
-            id="contained-modal-title-vcenter"
-            className="flex-fill m-0 text-center logo-no-nav h2 fw-bold font-titoli"
-          >
-            Modifica Richiesta
-          </p>
+          <div className="flex-fill">
+            <p
+              id="contained-modal-title-vcenter"
+              className=" m-0 text-center logo-no-nav h2 fw-bold font-titoli"
+            >
+              Effettua richiesta
+            </p>
+          </div>
         </Modal.Header>
         <Modal.Body className="bg-secondario text-bianco ">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -115,7 +117,7 @@ const ModalModificaRichiesta = (props) => {
             {errore !== "" && <p className="text-danger mt-3">{errore}</p>}
             <div className="d-flex mt-5 justify-content-around ">
               <Button type="submit" variant="success">
-                modifica
+                chiedi
               </Button>
               <Button
                 variant="outline-ng-variant"
@@ -128,13 +130,13 @@ const ModalModificaRichiesta = (props) => {
           </Form>
         </Modal.Body>
       </Modal>
-      {modificaSuccess && (
+      {success && (
         <ModalSuccessAction
-          text={"Richiesta modificata con successo"}
-          show={modificaSuccess}
+          text={"Richiesta effettuata con successo!"}
+          show={success}
         />
       )}
     </>
   );
 };
-export default ModalModificaRichiesta;
+export default ModalEffettuaRichiesta;

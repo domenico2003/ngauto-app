@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  Button,
   Card,
   Col,
   Container,
@@ -36,6 +35,7 @@ const RichiestaDetails = () => {
 
   useEffect(() => {
     DetailsRichiestaFetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   const renderTooltip = (props) => (

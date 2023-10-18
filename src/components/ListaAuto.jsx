@@ -3,20 +3,25 @@ import {
   Button,
   Card,
   Col,
-  ListGroup,
   OverlayTrigger,
   Row,
   Spinner,
   Tooltip,
 } from "react-bootstrap";
 import { BsFillInfoSquareFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import ModalEffettuaRichiesta from "./ModalEffettuaRichiesta";
 
 const ListaAuto = ({ url, total }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  let profileMe = useSelector((state) => state.profilo.me);
+  const [effettuaRichiestaModale, setEffettuaRichiestaModale] = useState(false);
 
   const [auto, setAuto] = useState(null);
+  const [autoSelected, setAutoSelected] = useState(null);
+
   const [pagina, setPagina] = useState(0);
   const [spinner, setSpinner] = useState(false);
   const [error, setError] = useState("");
@@ -25,6 +30,7 @@ const ListaAuto = ({ url, total }) => {
     if (!url.includes("undefined")) {
       autoFetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, url]);
   useEffect(() => {
     setPagina(0);
@@ -139,10 +145,14 @@ const ListaAuto = ({ url, total }) => {
                       </div>
                     </Card.Body>
                   </div>
-                  {location.pathname === "/aNoleggio" && (
+                  {location.pathname === "/aNoleggio" && profileMe !== null && (
                     <Button
                       variant="success"
                       className="w-100 rounded-0 border-0"
+                      onClick={() => {
+                        setEffettuaRichiestaModale(true);
+                        setAutoSelected(singolaAuto);
+                      }}
                     >
                       Noleggia
                     </Button>
@@ -209,6 +219,13 @@ const ListaAuto = ({ url, total }) => {
         <div className="d-flex justify-content-center mt-5">
           <Spinner animation="grow" variant="ng-variant" />
         </div>
+      )}
+      {effettuaRichiestaModale && (
+        <ModalEffettuaRichiesta
+          show={effettuaRichiestaModale}
+          onHide={() => setEffettuaRichiestaModale(false)}
+          auto={autoSelected}
+        />
       )}
     </>
   );
