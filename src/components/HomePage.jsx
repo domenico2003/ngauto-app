@@ -1,25 +1,26 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { Carousel, Col, Container, Row } from "react-bootstrap";
 import {
-  Card,
-  Carousel,
-  Col,
-  Container,
-  OverlayTrigger,
-  Row,
-  Tooltip,
-} from "react-bootstrap";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { BsFillInfoSquareFill } from "react-icons/bs";
-import { useLocation, useNavigate } from "react-router-dom";
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineClockCircle,
+} from "react-icons/ai";
+
+import { useNavigate } from "react-router-dom";
 import logo from "../ng-auto-logo.png";
 import img1 from "../img/imgAuto1.jpg";
-
+import img2 from "../img/imgAuto3.jpg";
+import img3 from "../img/imgAuto5.jpg";
+import AOS from "aos";
 const HomePage = () => {
   const navigate = useNavigate();
   const [auto, setAuto] = useState([]);
   useEffect(() => {
     autoFetch();
+    AOS.init({
+      duration: 2000, // durata dell'animazione (in millisecondi)
+    });
   }, []);
 
   const autoFetch = async () => {
@@ -104,22 +105,85 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-        <div data-aos="fade-right">
+        <div>
           <Row xs={1} md={2}>
-            <Col className="oblique-border">
+            <Col className="oblique-border" data-aos="fade-right">
               <img src={img1} alt="auto1" />
             </Col>{" "}
-            <Col className="d-flex flex-column align-items-center">
-              <p className="m-0 fw-bold text-center h2 font-titoli titoloPagina">
+            <Col
+              className="d-flex background flex-column align-items-center my-5 my-md-0"
+              data-aos="fade-left"
+            >
+              <p className="m-0 fw-bold text-center my-3 my-md-0 h2 font-titoli titoloPagina">
                 Visualizza auto
               </p>
-              <p className="m-0 w-personalizzata d-block my-auto text-center align-self-center">
+              <p className="m-0  w-personalizzata    d-block my-md-auto text-center align-self-center">
                 Dai un'ochiata alle auto, nuove e usate, che possono essere
-                acquistate o noleggiate nelle apposite pagine
+                acquistate o noleggiate nelle apposite pagine.
               </p>
-              <div class="canvas">
-                <div class="flower"></div>
-              </div>
+            </Col>
+          </Row>
+        </div>
+        <div className="my-6">
+          <Row xs={1} md={2}>
+            <Col
+              className="oblique-border-destro order-md-2"
+              data-aos="fade-left"
+            >
+              <img src={img2} alt="auto2" />
+            </Col>{" "}
+            <Col
+              className="d-flex background flex-column align-items-center"
+              data-aos="fade-right"
+            >
+              <p className="m-0 fw-bold text-center my-3 my-md-0 h2 font-titoli titoloPagina">
+                Richiedi auto per noleggio
+              </p>
+              <p className="m-0  w-personalizzata  d-block my-auto text-center align-self-center">
+                Registrati o accedi per richiedere il noleggio di un auto per un
+                periodo di tempo.
+              </p>
+            </Col>
+          </Row>
+        </div>
+        <div className="my-6">
+          <Row xs={1} md={2}>
+            <Col className="oblique-border" data-aos="fade-right">
+              <img src={img3} alt="auto4" />
+            </Col>{" "}
+            <Col
+              className="d-flex background flex-column align-items-center my-5 my-md-0"
+              data-aos="fade-left"
+            >
+              <p className="m-0 fw-bold text-center my-3 my-md-0 h2 font-titoli titoloPagina d-flex justifu-cpmtent-center">
+                <span className="h3 titoloPagina h-auto me-2">
+                  {" "}
+                  <AiOutlineClockCircle />
+                </span>{" "}
+                Orari di apertura
+              </p>
+              <p className="m-0  w-personalizzata  d-block my-auto text-center align-self-center">
+                <p className="m-0">
+                  <span className="fw-bold text-warning">
+                    Dal Lunedì al Venerdì:{" "}
+                  </span>
+                  <span className="d-block text-decoration-underline fw-bold no-truncate">
+                    8:00-12:30 /14:30-18:30
+                  </span>
+                </p>
+                <p className="m-0">
+                  <span className="fw-bold text-warning">Sabato: </span>
+                  <span className=" text-decoration-underline fw-bold">
+                    8:00-12:30
+                  </span>
+                </p>
+                <p className="m-0">
+                  <span className="fw-bold text-warning">Domenica: </span>
+                  <span className=" text-decoration-underline fw-bold">
+                    Chiuso
+                  </span>
+                </p>
+              </p>
             </Col>
           </Row>
         </div>

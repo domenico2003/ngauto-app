@@ -30,6 +30,8 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import { FiArrowUp } from "react-icons/fi";
 
+import "aos/dist/aos.css";
+
 function App() {
   const [loading, setLoading] = useState(false);
 
